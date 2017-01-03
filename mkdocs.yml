@@ -1,1 +1,14 @@
-site_name: My Docs
+site_name: Daniel Test Docs
+pages:
+    - 'WELCOME': 'docs/index.md'
+    - 'NEW HOME': '_test_wiki/lets-get-started.md'
+    - User Guide:
+        - 'Writing your docs': '_test_wiki/1.md'
+        - 'Styling your docs': '_test_wiki/2.md'
+    - Installation:
+        - 'Writing your docs2': '_test_wiki/3.md'
+        - 'Styling your docs2': '_test_wiki/4.md'
+    - 'TEST HOME': '_test_wiki/TEST-HOME.md'
+theme_dir: 'custom_theme'
+extra_css:
+    - custom_theme/css/main.css
