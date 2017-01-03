@@ -1,0 +1,161 @@
+<html>
+  <head>
+    <title>Styling your docs - Daniel Test Docs</title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../../css/main.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+
+  </style>
+  </head>
+
+
+  <body>
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/index.html">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/docs/">Docs</a></li>
+      </ul>
+      
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="row">
+
+<div class="container" id="main">
+    <div class="row">
+        <div class="col-md-12">
+        
+          
+            <nav id="mysidebar_dani" class="col-sm-3 col-md-3 bs-docs-sidebar">
+              <ul id="sidebar" class="nav nav-stacked fixed">
+                
+                    
+                        <li class="">
+                            <a href="../../docs/">WELCOME</a>
+                        </li>
+                    
+                
+                    
+                        <li class="">
+                            <a href="../lets-get-started/">NEW HOME</a>
+                        </li>
+                    
+                
+                    
+                        <li>User Guide
+                            <ul class="nav nav-stacked">
+                            
+                                <li class="">
+                                    <a href="../1/">Writing your docs</a>
+                                </li>
+                            
+                                <li class="current">
+                                    <a href="./">Styling your docs</a>
+                                </li>
+                            
+                            </ul>
+                        </li>
+                    
+                
+                    
+                        <li>Installation
+                            <ul class="nav nav-stacked">
+                            
+                                <li class="">
+                                    <a href="../3/">Writing your docs2</a>
+                                </li>
+                            
+                                <li class="">
+                                    <a href="../4/">Styling your docs2</a>
+                                </li>
+                            
+                            </ul>
+                        </li>
+                    
+                
+                    
+                        <li class="">
+                            <a href="../TEST-HOME/">TEST HOME</a>
+                        </li>
+                    
+                
+              </ul>
+            </nav>
+          
+        
+        <div class="col-md-9">
+            <p>Prerequisites: <code>JRE1.8+</code>, <code>bash</code>, <code>mongodb</code> (optional)</p>
+<p>Start a single-node, local server as</p>
+<pre><code>bin/gpServer.sh restart all 
+</code></pre>
+
+<p>Start the command-line interface (CLI) client as </p>
+<pre><code>bin/cli.sh
+</code></pre>
+
+<p>The steps for other server configurations are similar and just need to specify the respective server and client properties files using the <code>-DgigapaxosConfig=</code> option.</p>
+<p>Upon starting the CLI client, you should see output like below with a prompt </p>
+<pre><code>GNS Client Version: 1.17_2016-5-16_build2010
+Connected to GNS.
+GNS CLI - Connected to GNS&gt;
+</code></pre>
+
+<p>Create an account as follows using your own email address:</p>
+<pre><code>GNS CLI - Connected to GNS&gt;account_create support@gns.name some_password
+Created an account with GUID 673B591F0558A4699493CA5BFF7FC8DFE4466347.
+GNS CLI - support@gns.name&gt;
+</code></pre>
+
+<p>The above will email a verification code to the specified email address if email verification is enabled. You can enable it by removing the <code>-disableEmailVerification</code> flag in the properties file <code>conf/gnsserver.1local.properties</code> being implicitly used here. If email verification is enabled, you would need to enter the verification code from the email as follows; if not, you can skip to the next step.</p>
+<pre><code>GNS CLI - support@gns.name&gt;account_verify support@gns.name 596E11
+Account verified.
+</code></pre>
+
+<p>Create a field in the created GUID as</p>
+<pre><code>GNS CLI - support@gns.name&gt;field_update count 12345
+Value '12345' written to field count for GUID 1FFCBCD4DC0E59840BA2E5313239C5240A296734
+</code></pre>
+
+<p>Now read it back as</p>
+<pre><code>GNS CLI - support@gns.name&gt;read
+{&quot;count&quot;:&quot;12345&quot;}
+</code></pre>
+
+<p>Type <code>help</code> to see a list of all supported commands.</p>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+  
+
+  </body>
+
+</html>

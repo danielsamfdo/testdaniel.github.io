@@ -1,0 +1,171 @@
+<html>
+  <head>
+    <title>Writing your docs2 - Daniel Test Docs</title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../../css/main.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+
+  </style>
+  </head>
+
+
+  <body>
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/index.html">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/docs/">Docs</a></li>
+      </ul>
+      
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="row">
+
+<div class="container" id="main">
+    <div class="row">
+        <div class="col-md-12">
+        
+          
+            <nav id="mysidebar_dani" class="col-sm-3 col-md-3 bs-docs-sidebar">
+              <ul id="sidebar" class="nav nav-stacked fixed">
+                
+                    
+                        <li class="">
+                            <a href="../../docs/">WELCOME</a>
+                        </li>
+                    
+                
+                    
+                        <li class="">
+                            <a href="../lets-get-started/">NEW HOME</a>
+                        </li>
+                    
+                
+                    
+                        <li>User Guide
+                            <ul class="nav nav-stacked">
+                            
+                                <li class="">
+                                    <a href="../1/">Writing your docs</a>
+                                </li>
+                            
+                                <li class="">
+                                    <a href="../2/">Styling your docs</a>
+                                </li>
+                            
+                            </ul>
+                        </li>
+                    
+                
+                    
+                        <li>Installation
+                            <ul class="nav nav-stacked">
+                            
+                                <li class="current">
+                                    <a href="./">Writing your docs2</a>
+                                </li>
+                            
+                                <li class="">
+                                    <a href="../4/">Styling your docs2</a>
+                                </li>
+                            
+                            </ul>
+                        </li>
+                    
+                
+                    
+                        <li class="">
+                            <a href="../TEST-HOME/">TEST HOME</a>
+                        </li>
+                    
+                
+              </ul>
+            </nav>
+          
+        
+        <div class="col-md-9">
+            <p>Prerequisites: <code>JRE1.8+</code>, <code>bash</code>, <code>mongodb</code> (optional).</p>
+<h3 id="obtaining-gns">Obtaining GNS</h3>
+<p>Download the latest, stable, binary-only package from the <a href="https://github.com/MobilityFirst/GNS/releases">GNS releases page</a>.</p>
+<h3 id="single-node-local-gns-server">Single-node, local GNS server</h3>
+<p>The GNS is a <a href="https://github.com/MobilityFirst/gigapaxos">gigapaxos</a> application, which means that gigapaxos is the distributed engine responsible for replicating and reconfiguring GNS replica nodes as needed. The GNS uses mongodb as its underlying database by default, so it is necessary to have mongodb running (on localhost and its default port) before starting the GNS. If mongodb is not already running, refer to the <a href="https://docs.mongodb.com/manual/installation/">mongodb installation instructions page</a> to set that up (recommended). If you prefer to not use mongodb for now, refer to the instructions further below to run the GNS in the in-memory database mode (not recommended for production use). </p>
+<p>Start a single-node, local GNS server as: </p>
+<pre><code>bin/gpServer.sh start all
+</code></pre>
+
+<p>To connect to this GNS server using the command-line interface (CLI), refer to the <a href="https://github.com/MobilityFirst/GNS/wiki/Command-Line-Interface">CLI introduction page</a>.</p>
+<h3 id="simple-client-example">Simple client example</h3>
+<p>To connect to the GNS server above using a Java client, we will use a simple client, <a href="https://github.com/MobilityFirst/GNS/blob/master/src/edu/umass/cs/gnsclient/examples/ClientExample.java">ClientExample</a> <a href="http://mobilityfirst.github.io/GNS/doc/edu/umass/cs/gnsclient/examples/ClientExample.html">(doc)</a>, that creates a record keyed by a globally unique identifier (GUID), performs a few field reads and writes, and deletes the record. Run this example client as</p>
+<pre><code>bin/gpClient.sh edu.umass.cs.gnsclient.examples.ClientExample
+</code></pre>
+
+<p>The client's output should be self-explanatory and it should exit gracefully with a success message. If it runs into exceptions, refer to this [troubleshooting TBD] page for common possible reasons.</p>
+<h3 id="in-memory-database-mode">In-memory database mode</h3>
+<p>If you prefer to not use mongodb, uncomment or enter <code>IN_MEMORY_DB=true</code> in the default configuration properties file, <code>gigapaxos.properties</code>. Using the in-memory mode does not affect durability or fault-tolerance as they are ensured by gigapaxos, however, the database size will be limited by memory, so it is not recommended for production use.</p>
+<h3 id="stopping-gns-servers">Stopping GNS server(s)</h3>
+<p>The GNS server can be stopped as</p>
+<pre><code>bin/gpServer.sh stop all
+</code></pre>
+
+<p>The above commands were intentionally designed to be simple, but it is important to understand what happened underneath the covers in order to be able to run a distributed server setup, which we do next by understanding how configuration properties are specified.</p>
+<h3 id="configuration-properties-overview">Configuration properties overview</h3>
+<p>Running the gigapaxos server script <code>bin/gpServer.sh</code> without any arguments prints a usage summary.</p>
+<p>The script looks for a properties file named <code>gigapaxos.properties</code> by default in the current directory and, if not found, in the <code>./conf/</code> subdirectory. A detailed explanation of gigapaxos properties is at the <a href="https://github.com/MobilityFirst/gigapaxos/wiki/Configuration-properties">gigapaxos configuration properties</a> page. We just need to observe here that the <code>APPLICATION</code> is GNSApp and the file specifies a single <em>reconfigurator</em> and a single <em>active</em> replica, both listening on localhost ports. Both gigapaxos- and GNS-specific properties are specified in the same properties file.</p>
+<p>In general, the client and server are expected to use different property files. The above example involved both the server and client using the same file, <code>./gigapaxos.properties</code>, for simplicity. Verify that the behavior is the same as above with the following commands each of which explicitly specifies the corresponding properties file. Note that <tt>restart</tt> is equivalent to a <tt>stop</tt> followed by a <tt>start</tt>.</p>
+<pre><code>bin/gpServer.sh -DgigapaxosConfig=conf/gnsserver.1local.properties restart all
+
+bin/gpClient.sh -DgigapaxosConfig=conf/gnsclient.1local.properties edu.umass.cs.gnsclient.examples.ClientExample
+
+bin/gpServer.sh -DgigapaxosConfig=conf/gnsserver.1local.properties stop all
+</code></pre>
+<p>For safety, many gigapaxos properties, especially node names and addresses, can not be manually changed after bootstrap. The best practice is to create a fresh server install in a new directory or to specify a different data directory in order to change the set of servers or the properties file. The server names in the multi-node, local properties file <tt>gnsserver.3local.properties</tt> below have no overlap with those in the single-node, local properties file used above, so we can re-use the same installation directory, but we do need to stop any already running servers before starting new ones in order to avoid port conflicts.</p>
+<h3 id="multi-node-local-gns">Multi-node, local GNS</h3>
+<p>Stop any previously started GNS servers by issuing <tt>stop all</tt> with the corresponding properties file. Then start a 3-replicated GNS server as</p>
+<pre><code>bin/gpServer.sh -DgigapaxosConfig=conf/gnsserver.3local.properties restart all
+
+bin/gpClient.sh -DgigapaxosConfig=conf/gnsclient.3local.properties edu.umass.cs.gnsclient.examples.ClientExample
+</code></pre>
+
+<h3 id="distributed-gns">Distributed GNS</h3>
+<p>Firing up distributed GNS servers on remote machines is nearly identical. It is necessary that the username on all of the remote machines is the same and, if different from the current shell's username, it must be specified using the <code>USERNAME</code> property in the properties file. It is convenient to set up passwordless ssh a priori from the local machine to the remote hosts, otherwise the script will prompt for a password for each remote host.</p>
+<pre><code>bin/gpServer.sh -DgigapaxosConfig=conf/gnsserver.ec2.properties restart all
+
+bin/gpClient.sh -DgigapaxosConfig=conf/gnsclient.ec2.properties edu.umass.cs.gnsclient.examples.ClientExample
+</code></pre>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+  
+
+  </body>
+
+</html>

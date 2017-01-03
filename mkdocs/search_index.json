@@ -1,0 +1,94 @@
+{
+    "docs": [
+        {
+            "location": "/docs/", 
+            "text": "THIS IS THE DOCUMENTATION FILE", 
+            "title": "WELCOME"
+        }, 
+        {
+            "location": "/_test_wiki/lets-get-started/", 
+            "text": "NEW GETTING STARTED\nWelcome to the hello wiki 12220 lesson! :sdfasdfasdf\n\n\nFirst level header\n\n\nThird level header\n\n\nSecond level header\n\n\nsadfasdfasdf\nStep 1:\n\n\ngit submodule add https://github.com/danielsamfdo/testwiki.wiki.git _test_wiki \n git submodule init \n git submodule update\n\n\n\n\nStep 2:\nInitial Configuration\nAdd the following to _config.yml\n\n\ncollections:\n  testwikicollection:\n    output: true\ndefaults:\n  - \n    scope:\n      path: \ntest_wiki\n\n      type: testwikicollection\n    values:\n      layout: documentation\n\n\n\n\nStep 3:\nmake a directory _testwikicollection\n\n\nStep 4:\nIn the File RakeFile, update it accordingly \nSOURCE = \"_test_wiki\" \nDESTINATION = \"_testwikicollection\"\n\n\nStep 5:\nRun\n\n\nrake add_front_matter", 
+            "title": "NEW HOME"
+        }, 
+        {
+            "location": "/_test_wiki/lets-get-started/#first-level-header", 
+            "text": "", 
+            "title": "First level header"
+        }, 
+        {
+            "location": "/_test_wiki/lets-get-started/#third-level-header", 
+            "text": "", 
+            "title": "Third level header"
+        }, 
+        {
+            "location": "/_test_wiki/lets-get-started/#second-level-header", 
+            "text": "sadfasdfasdf\nStep 1:  git submodule add https://github.com/danielsamfdo/testwiki.wiki.git _test_wiki   git submodule init   git submodule update  Step 2:\nInitial Configuration\nAdd the following to _config.yml  collections:\n  testwikicollection:\n    output: true\ndefaults:\n  - \n    scope:\n      path:  test_wiki \n      type: testwikicollection\n    values:\n      layout: documentation  Step 3:\nmake a directory _testwikicollection  Step 4:\nIn the File RakeFile, update it accordingly \nSOURCE = \"_test_wiki\" \nDESTINATION = \"_testwikicollection\"  Step 5:\nRun  rake add_front_matter", 
+            "title": "Second level header"
+        }, 
+        {
+            "location": "/_test_wiki/1/", 
+            "text": "Prerequisites: \nJDK1.8+\n, \nant1.9+\n\n\nDownload the latest stable source package from the \nGNS releases page\n or download the latest (possible unstable) \ngithub commit\n and compile as follows (replacing '*' in the second line with the version number of the download):\n\n\ngit clone https://github.com/MobilityFirst/GNS\ncd GNS-*   \nant\n\n\n\n\nA successful build should print \"BUILD SUCCESSFUL\" at the end and place the compiled jars in the \njars/\n sub-directory.\n\n\nAt this point, you can proceed as-is with the instructions in the \nGetting Started\n or other pages.", 
+            "title": "Writing your docs"
+        }, 
+        {
+            "location": "/_test_wiki/2/", 
+            "text": "Prerequisites: \nJRE1.8+\n, \nbash\n, \nmongodb\n (optional)\n\n\nStart a single-node, local server as\n\n\nbin/gpServer.sh restart all \n\n\n\n\nStart the command-line interface (CLI) client as \n\n\nbin/cli.sh\n\n\n\n\nThe steps for other server configurations are similar and just need to specify the respective server and client properties files using the \n-DgigapaxosConfig=\n option.\n\n\nUpon starting the CLI client, you should see output like below with a prompt \n\n\nGNS Client Version: 1.17_2016-5-16_build2010\nConnected to GNS.\nGNS CLI - Connected to GNS\n\n\n\n\n\nCreate an account as follows using your own email address:\n\n\nGNS CLI - Connected to GNS\naccount_create support@gns.name some_password\nCreated an account with GUID 673B591F0558A4699493CA5BFF7FC8DFE4466347.\nGNS CLI - support@gns.name\n\n\n\n\n\nThe above will email a verification code to the specified email address if email verification is enabled. You can enable it by removing the \n-disableEmailVerification\n flag in the properties file \nconf/gnsserver.1local.properties\n being implicitly used here. If email verification is enabled, you would need to enter the verification code from the email as follows; if not, you can skip to the next step.\n\n\nGNS CLI - support@gns.name\naccount_verify support@gns.name 596E11\nAccount verified.\n\n\n\n\nCreate a field in the created GUID as\n\n\nGNS CLI - support@gns.name\nfield_update count 12345\nValue '12345' written to field count for GUID 1FFCBCD4DC0E59840BA2E5313239C5240A296734\n\n\n\n\nNow read it back as\n\n\nGNS CLI - support@gns.name\nread\n{\ncount\n:\n12345\n}\n\n\n\n\nType \nhelp\n to see a list of all supported commands.", 
+            "title": "Styling your docs"
+        }, 
+        {
+            "location": "/_test_wiki/3/", 
+            "text": "Prerequisites: \nJRE1.8+\n, \nbash\n, \nmongodb\n (optional).\n\n\nObtaining GNS\n\n\nDownload the latest, stable, binary-only package from the \nGNS releases page\n.\n\n\nSingle-node, local GNS server\n\n\nThe GNS is a \ngigapaxos\n application, which means that gigapaxos is the distributed engine responsible for replicating and reconfiguring GNS replica nodes as needed. The GNS uses mongodb as its underlying database by default, so it is necessary to have mongodb running (on localhost and its default port) before starting the GNS. If mongodb is not already running, refer to the \nmongodb installation instructions page\n to set that up (recommended). If you prefer to not use mongodb for now, refer to the instructions further below to run the GNS in the in-memory database mode (not recommended for production use). \n\n\nStart a single-node, local GNS server as: \n\n\nbin/gpServer.sh start all\n\n\n\n\nTo connect to this GNS server using the command-line interface (CLI), refer to the \nCLI introduction page\n.\n\n\nSimple client example\n\n\nTo connect to the GNS server above using a Java client, we will use a simple client, \nClientExample\n \n(doc)\n, that creates a record keyed by a globally unique identifier (GUID), performs a few field reads and writes, and deletes the record. Run this example client as\n\n\nbin/gpClient.sh edu.umass.cs.gnsclient.examples.ClientExample\n\n\n\n\nThe client's output should be self-explanatory and it should exit gracefully with a success message. If it runs into exceptions, refer to this [troubleshooting TBD] page for common possible reasons.\n\n\nIn-memory database mode\n\n\nIf you prefer to not use mongodb, uncomment or enter \nIN_MEMORY_DB=true\n in the default configuration properties file, \ngigapaxos.properties\n. Using the in-memory mode does not affect durability or fault-tolerance as they are ensured by gigapaxos, however, the database size will be limited by memory, so it is not recommended for production use.\n\n\nStopping GNS server(s)\n\n\nThe GNS server can be stopped as\n\n\nbin/gpServer.sh stop all\n\n\n\n\nThe above commands were intentionally designed to be simple, but it is important to understand what happened underneath the covers in order to be able to run a distributed server setup, which we do next by understanding how configuration properties are specified.\n\n\nConfiguration properties overview\n\n\nRunning the gigapaxos server script \nbin/gpServer.sh\n without any arguments prints a usage summary.\n\n\nThe script looks for a properties file named \ngigapaxos.properties\n by default in the current directory and, if not found, in the \n./conf/\n subdirectory. A detailed explanation of gigapaxos properties is at the \ngigapaxos configuration properties\n page. We just need to observe here that the \nAPPLICATION\n is GNSApp and the file specifies a single \nreconfigurator\n and a single \nactive\n replica, both listening on localhost ports. Both gigapaxos- and GNS-specific properties are specified in the same properties file.\n\n\nIn general, the client and server are expected to use different property files. The above example involved both the server and client using the same file, \n./gigapaxos.properties\n, for simplicity. Verify that the behavior is the same as above with the following commands each of which explicitly specifies the corresponding properties file. Note that \nrestart\n is equivalent to a \nstop\n followed by a \nstart\n.\n\n\nbin/gpServer.sh -DgigapaxosConfig=conf/gnsserver.1local.properties restart all\n\nbin/gpClient.sh -DgigapaxosConfig=conf/gnsclient.1local.properties edu.umass.cs.gnsclient.examples.ClientExample\n\nbin/gpServer.sh -DgigapaxosConfig=conf/gnsserver.1local.properties stop all\n\n\n\nFor safety, many gigapaxos properties, especially node names and addresses, can not be manually changed after bootstrap. The best practice is to create a fresh server install in a new directory or to specify a different data directory in order to change the set of servers or the properties file. The server names in the multi-node, local properties file \ngnsserver.3local.properties\n below have no overlap with those in the single-node, local properties file used above, so we can re-use the same installation directory, but we do need to stop any already running servers before starting new ones in order to avoid port conflicts.\n\n\nMulti-node, local GNS\n\n\nStop any previously started GNS servers by issuing \nstop all\n with the corresponding properties file. Then start a 3-replicated GNS server as\n\n\nbin/gpServer.sh -DgigapaxosConfig=conf/gnsserver.3local.properties restart all\n\nbin/gpClient.sh -DgigapaxosConfig=conf/gnsclient.3local.properties edu.umass.cs.gnsclient.examples.ClientExample\n\n\n\n\nDistributed GNS\n\n\nFiring up distributed GNS servers on remote machines is nearly identical. It is necessary that the username on all of the remote machines is the same and, if different from the current shell's username, it must be specified using the \nUSERNAME\n property in the properties file. It is convenient to set up passwordless ssh a priori from the local machine to the remote hosts, otherwise the script will prompt for a password for each remote host.\n\n\nbin/gpServer.sh -DgigapaxosConfig=conf/gnsserver.ec2.properties restart all\n\nbin/gpClient.sh -DgigapaxosConfig=conf/gnsclient.ec2.properties edu.umass.cs.gnsclient.examples.ClientExample", 
+            "title": "Writing your docs2"
+        }, 
+        {
+            "location": "/_test_wiki/3/#obtaining-gns", 
+            "text": "Download the latest, stable, binary-only package from the  GNS releases page .", 
+            "title": "Obtaining GNS"
+        }, 
+        {
+            "location": "/_test_wiki/3/#single-node-local-gns-server", 
+            "text": "The GNS is a  gigapaxos  application, which means that gigapaxos is the distributed engine responsible for replicating and reconfiguring GNS replica nodes as needed. The GNS uses mongodb as its underlying database by default, so it is necessary to have mongodb running (on localhost and its default port) before starting the GNS. If mongodb is not already running, refer to the  mongodb installation instructions page  to set that up (recommended). If you prefer to not use mongodb for now, refer to the instructions further below to run the GNS in the in-memory database mode (not recommended for production use).   Start a single-node, local GNS server as:   bin/gpServer.sh start all  To connect to this GNS server using the command-line interface (CLI), refer to the  CLI introduction page .", 
+            "title": "Single-node, local GNS server"
+        }, 
+        {
+            "location": "/_test_wiki/3/#simple-client-example", 
+            "text": "To connect to the GNS server above using a Java client, we will use a simple client,  ClientExample   (doc) , that creates a record keyed by a globally unique identifier (GUID), performs a few field reads and writes, and deletes the record. Run this example client as  bin/gpClient.sh edu.umass.cs.gnsclient.examples.ClientExample  The client's output should be self-explanatory and it should exit gracefully with a success message. If it runs into exceptions, refer to this [troubleshooting TBD] page for common possible reasons.", 
+            "title": "Simple client example"
+        }, 
+        {
+            "location": "/_test_wiki/3/#in-memory-database-mode", 
+            "text": "If you prefer to not use mongodb, uncomment or enter  IN_MEMORY_DB=true  in the default configuration properties file,  gigapaxos.properties . Using the in-memory mode does not affect durability or fault-tolerance as they are ensured by gigapaxos, however, the database size will be limited by memory, so it is not recommended for production use.", 
+            "title": "In-memory database mode"
+        }, 
+        {
+            "location": "/_test_wiki/3/#stopping-gns-servers", 
+            "text": "The GNS server can be stopped as  bin/gpServer.sh stop all  The above commands were intentionally designed to be simple, but it is important to understand what happened underneath the covers in order to be able to run a distributed server setup, which we do next by understanding how configuration properties are specified.", 
+            "title": "Stopping GNS server(s)"
+        }, 
+        {
+            "location": "/_test_wiki/3/#configuration-properties-overview", 
+            "text": "Running the gigapaxos server script  bin/gpServer.sh  without any arguments prints a usage summary.  The script looks for a properties file named  gigapaxos.properties  by default in the current directory and, if not found, in the  ./conf/  subdirectory. A detailed explanation of gigapaxos properties is at the  gigapaxos configuration properties  page. We just need to observe here that the  APPLICATION  is GNSApp and the file specifies a single  reconfigurator  and a single  active  replica, both listening on localhost ports. Both gigapaxos- and GNS-specific properties are specified in the same properties file.  In general, the client and server are expected to use different property files. The above example involved both the server and client using the same file,  ./gigapaxos.properties , for simplicity. Verify that the behavior is the same as above with the following commands each of which explicitly specifies the corresponding properties file. Note that  restart  is equivalent to a  stop  followed by a  start .  bin/gpServer.sh -DgigapaxosConfig=conf/gnsserver.1local.properties restart all\n\nbin/gpClient.sh -DgigapaxosConfig=conf/gnsclient.1local.properties edu.umass.cs.gnsclient.examples.ClientExample\n\nbin/gpServer.sh -DgigapaxosConfig=conf/gnsserver.1local.properties stop all  For safety, many gigapaxos properties, especially node names and addresses, can not be manually changed after bootstrap. The best practice is to create a fresh server install in a new directory or to specify a different data directory in order to change the set of servers or the properties file. The server names in the multi-node, local properties file  gnsserver.3local.properties  below have no overlap with those in the single-node, local properties file used above, so we can re-use the same installation directory, but we do need to stop any already running servers before starting new ones in order to avoid port conflicts.", 
+            "title": "Configuration properties overview"
+        }, 
+        {
+            "location": "/_test_wiki/3/#multi-node-local-gns", 
+            "text": "Stop any previously started GNS servers by issuing  stop all  with the corresponding properties file. Then start a 3-replicated GNS server as  bin/gpServer.sh -DgigapaxosConfig=conf/gnsserver.3local.properties restart all\n\nbin/gpClient.sh -DgigapaxosConfig=conf/gnsclient.3local.properties edu.umass.cs.gnsclient.examples.ClientExample", 
+            "title": "Multi-node, local GNS"
+        }, 
+        {
+            "location": "/_test_wiki/3/#distributed-gns", 
+            "text": "Firing up distributed GNS servers on remote machines is nearly identical. It is necessary that the username on all of the remote machines is the same and, if different from the current shell's username, it must be specified using the  USERNAME  property in the properties file. It is convenient to set up passwordless ssh a priori from the local machine to the remote hosts, otherwise the script will prompt for a password for each remote host.  bin/gpServer.sh -DgigapaxosConfig=conf/gnsserver.ec2.properties restart all\n\nbin/gpClient.sh -DgigapaxosConfig=conf/gnsclient.ec2.properties edu.umass.cs.gnsclient.examples.ClientExample", 
+            "title": "Distributed GNS"
+        }, 
+        {
+            "location": "/_test_wiki/4/", 
+            "text": "Getting Started\n\n\nCommand-Line Interface\n\n\nBuilding from source\n\n\nTroubleshooting\n\n\nFAQ", 
+            "title": "Styling your docs2"
+        }, 
+        {
+            "location": "/_test_wiki/TEST-HOME/", 
+            "text": "Welcome to the testwiki wiki! UPDATE 105", 
+            "title": "TEST HOME"
+        }
+    ]
+}
